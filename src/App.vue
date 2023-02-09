@@ -43,12 +43,8 @@ input {
 }
 
 @font-face {
-    font-family: 'icomoon';
-    src: url('./assets/fonts/icomoon.eot?tomleg');
-    src: url('./assets/fonts/icomoon.eot?tomleg#iefix') format('embedded-opentype'),
-        url('./assets/fonts/icomoon.ttf?tomleg') format('truetype'),
-        url('./assets/fonts/icomoon.woff?tomleg') format('woff'),
-        url('./assets/fonts/icomoon.svg?tomleg#icomoon') format('svg');
+    font-family: 'iconfont';
+    src: url('./assets/styles/fonts/iconfont.ttf?t=1675938370759') format('truetype');
     font-weight: normal;
     font-style: normal;
     font-display: block;
@@ -60,8 +56,18 @@ em {
 }
 
 .iconfont {
-    font-family: 'icomoon';
+    font-family: 'iconfont'!important;
     font-size: 12px;
     color: #666666;
+}
+.clearfix::before,
+.clearfix::after {
+    content: '';
+    display: table;
+    clear: both;
+}
+/*让button 按钮 变成小手*/
+button {
+    cursor: pointer;
 }
 </style>

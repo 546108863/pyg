@@ -96,7 +96,7 @@
                     <li style="width: 90px;">
                         <dl>
                             <dt>帮助中心</dt>
-                            <dd><img src="../../../assets/images/code.jpg" alt=""></dd>
+                            <dd><img src="../assets/images/code.jpg" alt=""></dd>
                             <dd style="font: 12px songti;"><span>品优购客户端</span></dd>
                         </dl>
                     </li>
@@ -176,7 +176,7 @@ export default {
     float: left;
     height: 52px;
     width: 52px;
-    background-image: url(../../../assets/images/icons.png);
+    background-image: url(../assets/images/icons.png);
     background-position: -253px 0px;
 }
 

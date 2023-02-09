@@ -21,17 +21,17 @@
                 <ul>
                     <li><a href="#">我的订单</a></li>
                     <li class="spacer"></li>
-                    <li><a href="#">我的品优购</a><span class="iconfont"></span></li>
+                    <li><a href="#">我的品优购</a><span class="iconfont">&#xe665;</span></li>
                     <li class="spacer"></li>
                     <li><a href="#">品优购会员</a></li>
                     <li class="spacer"></li>
                     <li><a href="#">企业采购</a></li>
                     <li class="spacer"></li>
-                    <li><a href="#">关注品优购</a><span class="iconfont"></span></li>
+                    <li><a href="#">关注品优购</a><span class="iconfont">&#xe665;</span></li>
                     <li class="spacer"></li>
-                    <li><a href="#">客户服务</a><span class="iconfont"></span></li>
+                    <li><a href="#">客户服务</a><span class="iconfont">&#xe665;</span></li>
                     <li class="spacer"></li>
-                    <li><a href="#">网站导航</a><span class="iconfont"></span></li>
+                    <li><a href="#">网站导航</a><span class="iconfont">&#xe665;</span></li>
                 </ul>
             </div>
         </div>

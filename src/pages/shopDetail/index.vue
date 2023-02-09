@@ -315,151 +315,36 @@
 
     </div>
     <!-- 详情页内容部分	 -->
-
-    <!-- footer start -->
-    <div class="footer">
-        <div class="w">
-            <!-- mod_service -->
-            <div class="mod_service">
-                <ul>
-                    <li>
-                        <i class="mod-service-icon mod_service_zheng"></i>
-                        <div class="mod_service_tit">
-                            <h5>正品保障</h5>
-                            <p>正品保障，提供发票</p>
-                        </div>
-                    </li>
-                    <li>
-                        <i class="mod-service-icon mod_service_kuai"></i>
-                        <div class="mod_service_tit">
-                            <h5>正品保障</h5>
-                            <p>正品保障，提供发票</p>
-                        </div>
-                    </li>
-                    <li>
-                        <i class="mod-service-icon mod_service_bao"></i>
-                        <div class="mod_service_tit">
-                            <h5>正品保障</h5>
-                            <p>正品保障，提供发票</p>
-                        </div>
-                    </li>
-                    <li>
-                        <i class="mod-service-icon mod_service_bao"></i>
-                        <div class="mod_service_tit">
-                            <h5>正品保障</h5>
-                            <p>正品保障，提供发票</p>
-                        </div>
-                    </li>
-                    <li>
-                        <i class="mod-service-icon mod_service_bao"></i>
-                        <div class="mod_service_tit">
-                            <h5>正品保障</h5>
-                            <p>正品保障，提供发票</p>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-            <!-- mod_help -->
-            <div class="mod_help">
-                <dl class="mod_help_item">
-                    <dt>购物指南</dt>
-                    <dd> <a href="#">购物流程 </a></dd>
-                    <dd> <a href="#">会员介绍 </a></dd>
-                    <dd> <a href="#">生活旅行/团购 </a></dd>
-                    <dd> <a href="#">常见问题 </a></dd>
-                    <dd> <a href="#">大家电 </a></dd>
-                    <dd> <a href="#">联系客服 </a></dd>
-                </dl>
-                <dl class="mod_help_item">
-                    <dt>购物指南</dt>
-                    <dd> <a href="#">购物流程 </a></dd>
-                    <dd> <a href="#">会员介绍 </a></dd>
-                    <dd> <a href="#">生活旅行/团购 </a></dd>
-                    <dd> <a href="#">常见问题 </a></dd>
-                    <dd> <a href="#">大家电 </a></dd>
-                    <dd> <a href="#">联系客服 </a></dd>
-                </dl>
-                <dl class="mod_help_item">
-                    <dt>购物指南</dt>
-                    <dd> <a href="#">购物流程 </a></dd>
-                    <dd> <a href="#">会员介绍 </a></dd>
-                    <dd> <a href="#">生活旅行/团购 </a></dd>
-                    <dd> <a href="#">常见问题 </a></dd>
-                    <dd> <a href="#">大家电 </a></dd>
-                    <dd> <a href="#">联系客服 </a></dd>
-                </dl>
-                <dl class="mod_help_item">
-                    <dt>购物指南</dt>
-                    <dd> <a href="#">购物流程 </a></dd>
-                    <dd> <a href="#">会员介绍 </a></dd>
-                    <dd> <a href="#">生活旅行/团购 </a></dd>
-                    <dd> <a href="#">常见问题 </a></dd>
-                    <dd> <a href="#">大家电 </a></dd>
-                    <dd> <a href="#">联系客服 </a></dd>
-                </dl>
-                <dl class="mod_help_item">
-                    <dt>购物指南</dt>
-                    <dd> <a href="#">购物流程 </a></dd>
-                    <dd> <a href="#">会员介绍 </a></dd>
-                    <dd> <a href="#">生活旅行/团购 </a></dd>
-                    <dd> <a href="#">常见问题 </a></dd>
-                    <dd> <a href="#">大家电 </a></dd>
-                    <dd> <a href="#">联系客服 </a></dd>
-                </dl>
-                <dl class="mod_help_item mod_help_app">
-                    <dt>帮助中心</dt>
-                    <dd>
-                        <img src="./images/upload/erweima.png" alt="">
-                        <p>品优购客户端</p>
-                    </dd>
-                </dl>
-            </div>
-
-            <!-- mod_copyright  -->
-            <div class="mod_copyright">
-                <p class="mod_copyright_links">
-                    关于我们 | 联系我们 | 联系客服 | 商家入驻 | 营销中心 | 手机品优购 | 友情链接 | 销售联盟 | 品优购社区 | 品优购公益 | English Site | Contact U
-                </p>
-                <p class="mod_copyright_info">
-                    地址：北京市昌平区建材城西路金燕龙办公楼一层 邮编：100096 电话：400-618-4000 传真：010-82935100 邮箱: zhanghj+itcast.cn <br> 京ICP备08001421号京公网安备110108007702
-                </p>
-            </div>
-        </div>
-    </div>
+    <!-- footer start --> 
+    <Bottom/>
     <!-- footer end -->
   </div>
 </template>
 
 <script>
+import Bottom from '../../components/bottom.vue'
+
 export default {
-    name:"ShopDetail"
+    name:"ShopDetail",
+    components: {
+        Bottom
+    }
 }
+
 </script>
 
 <style scoped>
-/*清除元素默认的内外边距  */
-* {
-    margin: 0;
-    padding: 0
-}
 /*让所有斜体 不倾斜*/
 em,
 i {
     font-style: normal;
-}
-/*去掉列表前面的小点*/
-li {
-    list-style: none;
 }
 /*图片没有边框   去掉图片底侧的空白缝隙*/
 img {
     border: 0;  /*ie6*/
     vertical-align: middle;
 }
-/*让button 按钮 变成小手*/
-button {
-    cursor: pointer;
-}
+
 /*取消链接的下划线*/
 a {
     color: #666;
@@ -507,6 +392,7 @@ body {
 .fr {
 	float: right;
 }
+
 @font-face {
     font-family: 'icomoon';
     src:  url('../../assets/fonts1/icomoon.eot?7kkyc2');
@@ -522,11 +408,7 @@ body {
 	font-size: 16px;
 	line-height: 26px;
 }
-/*版心*/
-.w {
-	width: 1200px;
-	margin: 0 auto;
-}
+
 .style-red {
 	color: #c81623;
 }
@@ -691,79 +573,6 @@ body {
 	padding: 0 25px;
 	line-height: 45px;
 	font-size: 16px;
-}
-/*footer 部分*/
-.footer {
-	height: 386px;
-	background-color: #f5f5f5;
-	padding-top: 30px;
-}
-.mod_service {
-	height: 79px;
-	border-bottom: 1px solid #ccc;
-}
-
-.mod_service li {
-	float: left;
-	width: 240px;
-	height: 79px;
-
-}
-.mod-service-icon {
-	/*浮动的盒子 可以直接给大小的 不需要转换*/
-	float: left;
-	width: 50px;
-	height: 50px;
-	margin-left: 35px;
-	background: url(./images/icons.png) no-repeat;
-}
-.mod_service_zheng {
-	background-position: -253px -3px;	
-}
-.mod_service_tit {
-	float: left;
-	margin-left: 5px;
-}
-.mod_service_tit h5 {
-	margin: 5px 0;
-}
-.mod_service_kuai {
-	background-position: -255px -54px;
-}
-.mod_service_bao {
-	background-position: -257px -105px;
-}
-.mod_help {
-	height: 187px;
-	border-bottom: 1px solid #ccc;
-}
-.mod_help_item {
-	float: left;
-	width: 150px;
-	padding: 20px 0 0 50px;
-}
-.mod_help_item dt {
-	height: 25px;
-	font-size: 16px;
-}
-.mod_help_item dd {
-	height: 22px;
-}
-.mod_help_app dt,
-.mod_help_app p {
-	padding-left: 15px;
-}
-.mod_help_app img {
-	margin: 7px 0;
-}
-.mod_copyright {
-	text-align: center;
-}
-.mod_copyright_links {
-	margin: 20px 0 15px 0;
-}
-.mod_copyright_info {
-	line-height: 18px;
 }
 
 /*详情页的样式文件*/
