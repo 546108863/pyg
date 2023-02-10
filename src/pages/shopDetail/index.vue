@@ -590,7 +590,6 @@ body {
 	height: 590px;
 }
 .preview_img {
-	height: 398px;
 	border: 1px solid #ccc;
 }
 .preview_list {

@@ -436,7 +436,7 @@
                         <span class="price-show">￥40.26</span>
                     </div>
                     <div class="price-sum-reduce">
-                        <span>已节省:-￥20.00</span>
+                        <div>已节省:<span>-￥20.00</span></div>
                     </div>
 
                 </div>
@@ -667,6 +667,7 @@ export default {
 
             .shop-text {
                 display: inline-block;
+                margin-left: 10px;
                 padding: 1px 3px;
                 background-color: #c81623;
                 color: white;
@@ -880,7 +881,7 @@ export default {
 
             .price-sum {
                 float: right;
-                width: 324px;
+                width: 234px;
                 margin: 10px 10px 0 0;
 
                 .price-sum-amount {
@@ -894,6 +895,9 @@ export default {
 
                 .price-sum-reduce {
                     float: right;
+                    span {
+                        margin-left: 10px;
+                    }
                 }
 
             }
