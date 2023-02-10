@@ -120,33 +120,7 @@
         <!-- 产品介绍模块 -->
         <div class="product_intro clearfix">
             <!-- 预览区域 -->
-            <div class="preview_wrap fl">
-                <div class="preview_img">
-                    <img src="./images/upload/s3.png" alt="">
-                </div>
-
-                <div class="preview_list">
-                    <a href="#" class="arrow_prev"></a>
-                    <a href="#" class="arrow_next"></a>
-                    <ul class="list_item">
-                        <li>
-                            <img src="./images/upload/pre.jpg" alt="">
-                        </li>
-                        <li class="current">
-                            <img src="./images/upload/pre.jpg" alt="">
-                        </li>
-                        <li>
-                            <img src="./images/upload/pre.jpg" alt="">
-                        </li>
-                        <li>
-                            <img src="./images/upload/pre.jpg" alt="">
-                        </li>
-                        <li>
-                            <img src="./images/upload/pre.jpg" alt="">
-                        </li>
-                    </ul>
-                </div>
-            </div>
+            <Zoom></Zoom>
             <!-- 产品详细信息 -->
             <div class="itemInfo_wrap fr">
                 <div class="sku_name">
@@ -323,11 +297,13 @@
 
 <script>
 import Bottom from '../../components/bottom.vue'
+import Zoom from './zoom/zoom.vue'
 
 export default {
     name:"ShopDetail",
     components: {
-        Bottom
+        Bottom,
+        Zoom
     }
 }
 
@@ -585,49 +561,7 @@ body {
 .crumb_wrap a {
 	margin-right: 10px;
 }
-.preview_wrap {
-	width: 400px;
-	height: 590px;
-}
-.preview_img {
-	border: 1px solid #ccc;
-}
-.preview_list {
-	position: relative;
-	height: 60px;
-	margin-top: 60px;
-}
-.list_item {
-	width: 320px;
-	height: 60px;
-	margin: 0 auto;
-}
-.list_item li {
-	float: left;
-	width: 56px;
-	height: 56px;
-	border: 2px solid transparent;
-	margin: 0 2px;
-}
-.list_item li.current {
-	border-color: #c81623;
-}
-.arrow_prev,
-.arrow_next {
-	position: absolute;
-	top: 15px;
-	width: 22px;
-	height: 32px;
-	background-color: purple;
-}
-.arrow_prev {
-	left: 0;
-	background: url(./images/arrow-prev.png) no-repeat;
-}
-.arrow_next {
-	right: 0;
-	background: url(./images/arrow-next.png) no-repeat;
-}
+
 .itemInfo_wrap {
 	width: 718px;
 }
