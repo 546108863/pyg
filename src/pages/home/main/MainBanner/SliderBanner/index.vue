@@ -1,31 +1,21 @@
 <template>
-    <div class="slider_banner">
-        <button class="slider_control prev">
+    <div class="slider_banner" @mouseenter="mousefun('enter')" @mouseleave="mousefun('out')">
+        <button class="slider_control prev" @click="clickPrev">
             <i class="iconfont">&#xe659;</i>
         </button>
-        <ul class="slider_img">
-                <li>
-                    <img src="./images/banner2.avif" alt="">
+        <ul class="slider_img" ref="sliderImg" :style="{left:`-${imgLeft}px`,transition:`left ${transitionTime}s`}">
+                <li v-for="(item) in imgList" :key="item.imgId">
+                    <img :src= item.imgUrl alt="" ref="">
                 </li>
                 <li>
-                    <img src="./images/banner1 .avif" alt="">
-                </li>
-                
-                <li>
-                    <img src="./images/banner3.avif" alt="">
-                </li>
-                <li>
-                    <img src="./images/banner4.png" alt="">
+                    <img :src=imgList[0].imgUrl alt="">
                 </li>
             </ul>
-            <button class="slider_control next">
+            <button class="slider_control next" @click="clickNext">
                 <i class="iconfont">&#xe65b;</i>
             </button>
-            <ul class="circle">
-                <li :class="highlight" @mouseenter="active" ></li>
-                <li></li>
-                <li></li>
-                <li></li>
+            <ul class="circle" ref="circle">
+                <li :class="index==imgIndex?'current':''" @mouseenter="active(index)" v-for="(item,index) in imgList.length " :key="index"></li>
         </ul>
     </div>
 </template>
@@ -35,14 +25,60 @@ export default {
     name: "SliderBanner",
     data() {
         return {
-            imgCount: 0,
-            highlight:""
+            imgList: [
+            {imgId:1,imgUrl:require("./images/banner1.avif")},
+            {imgId:2,imgUrl:require("./images/banner2.avif")},
+            {imgId:3,imgUrl:require("./images/banner3.avif")},
+            {imgId:4,imgUrl:require("./images/banner4.png")}
+        ],
+            imgLeft: 0,
+            imgWidth: 0,
+            imgIndex:0,
+            timer:"",
+            flag:true,
+            transitionTime:0.8
         }
     },
     methods: {
-        active() {
-            this.highlight = "current";
+        mousefun(type) {
+            type==='enter'?clearTimeout(this.timer):this.setTimer();
         },
+
+        setTimer() {
+            this.timer = setInterval(() => {
+                this.clickNext();
+            }, 2500);
+        },
+
+        active(index) {
+            this.imgIndex = index;
+            this.imgLeft = this.imgWidth * index;
+        },
+
+        clickPrev() {
+            this.imgIndex--;
+            if(this.imgIndex < 0){
+                this.transitionTime = 0;
+                this.imgIndex = this.imgList.length-1;
+                this.imgLeft = this.imgIndex * this.imgWidth;
+            }else{
+                this.transitionTime = 0.8;
+            }
+            this.imgLeft = this.imgIndex * this.imgWidth
+        },
+
+        clickNext(){
+            this.imgIndex++;
+            if(this.imgIndex >= this.imgList.length){
+                this.imgIndex = 0;
+                this.imgLeft = 0;
+            }
+            this.imgLeft = this.imgIndex * this.imgWidth;
+        }
+    },
+    mounted() {
+        this.imgWidth = this.$refs.sliderImg.children[0].offsetWidth;
+        this.setTimer();
     }
 }
 </script>
@@ -50,7 +86,7 @@ export default {
 <style lang="less" scoped>
 @font-face {
   font-family: 'iconfont';
-  src: url('../../../../../assets/styles/font_slider_banner/iconfont.ttf?t=1676042097744') format('truetype');
+  src: url('@/assets/styles/font_slider_banner/iconfont.ttf?t=1676042097744') format('truetype');
 }
 .iconfont {
   font-family: "iconfont" !important;
@@ -69,6 +105,7 @@ export default {
         width: 80px;
         height: 35px;
         top: 50%;
+        z-index: 99;
         border-radius: 20px;
         background-color: rgba(0,0,0,.15);
         i {
@@ -95,6 +132,7 @@ export default {
         }
     }
     .slider_img {
+        position: absolute;
         width: 500%;
         li {
             float: left;
