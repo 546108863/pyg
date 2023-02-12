@@ -1,6 +1,6 @@
 <template>
     <div class="slider_banner" @mouseenter="mousefun('enter')" @mouseleave="mousefun('out')">
-        <button class="slider_control prev" @click="clickPrev">
+        <button class="slider_control prev" @click="throttle(clickPrev)">
             <i class="iconfont">&#xe659;</i>
         </button>
         <ul class="slider_img" ref="sliderImg" :style="{left:`-${imgLeft}px`,transition:`left ${transitionTime}s`}">
@@ -11,7 +11,7 @@
                     <img :src=imgList[0].imgUrl alt="">
                 </li>
             </ul>
-            <button class="slider_control next" @click="clickNext">
+            <button class="slider_control next" @click="throttle(clickNext)">
                 <i class="iconfont">&#xe65b;</i>
             </button>
             <ul class="circle" ref="circle">
@@ -56,24 +56,43 @@ export default {
         },
 
         clickPrev() {
-            this.imgIndex--;
-            if(this.imgIndex < 0){
+            if(--this.imgIndex < 0) {
                 this.transitionTime = 0;
+                this.imgLeft = this.imgList.length * this.imgWidth;
                 this.imgIndex = this.imgList.length-1;
-                this.imgLeft = this.imgIndex * this.imgWidth;
-            }else{
+                setTimeout(() => {
+                    this.transitionTime = 0.8;
+                    this.imgLeft -= this.imgWidth;
+                },this.transitionTime * 1000);
+            } else {
                 this.transitionTime = 0.8;
+                this.imgLeft = this.imgIndex * this.imgWidth
             }
-            this.imgLeft = this.imgIndex * this.imgWidth
         },
 
         clickNext(){
-            this.imgIndex++;
-            if(this.imgIndex >= this.imgList.length){
+            if(++this.imgIndex >= this.imgList.length){
+                this.imgLeft = this.imgIndex * this.imgWidth;
                 this.imgIndex = 0;
-                this.imgLeft = 0;
+                setTimeout(() => {
+                    this.transitionTime = 0;
+                    this.imgLeft = 0;
+                }, this.transitionTime * 1000);
+            }else{
+                this.transitionTime = 0.8;
+                this.imgLeft = this.imgIndex * this.imgWidth;
             }
-            this.imgLeft = this.imgIndex * this.imgWidth;
+        },
+
+        
+        throttle(func){
+            if(this.flag) {
+                this.flag = false;
+                func();
+                setTimeout(() => {
+                    this.flag = true
+                }, 800);
+            }
         }
     },
     mounted() {
@@ -133,7 +152,8 @@ export default {
     }
     .slider_img {
         position: absolute;
-        width: 500%;
+        display: flex;
+        min-width: 720px;
         li {
             float: left;
             img {
