@@ -19,7 +19,7 @@
       <div
         class="seckill-list"
         :style="{
-          width: this.imgList.length * 202 + 'px',
+          width: (this.imgList.length+5) * 202 + 'px',
           left: `-${imgLeft}px`,
           transition: `left ${transitionTime}s`,
         }"
@@ -97,7 +97,7 @@
 
 <script>
 export default {
-  name: "ContainerMiddleBanner",
+  name: "seckill",
   data() {
     return {
       transitionTime: 0.8,
@@ -122,6 +122,9 @@ export default {
         { imgId: 10, imgUrl: require("./images/seckill (10).avif") },
         { imgId: 11, imgUrl: require("./images/seckill (11).avif") },
         { imgId: 12, imgUrl: require("./images/seckill (12).avif") },
+        { imgId: 13, imgUrl: require("./images/seckill (13).avif") },
+        { imgId: 14, imgUrl: require("./images/seckill (14).avif") },
+        { imgId: 15, imgUrl: require("./images/seckill (15).avif") },
       ],
     };
   },
@@ -140,8 +143,8 @@ export default {
     clickPrev() {
       if (--this.imgIndex < 0) {
         this.transitionTime = 0;
-        this.imgLeft = this.imgList.length * this.imgWidth;
-        this.imgIndex = this.imgList.length - 1;
+        this.imgLeft = this.imgList.length/5 * this.imgWidth;
+        this.imgIndex = this.imgList.length/5 - 1;
         setTimeout(() => {
           this.transitionTime = 0.8;
           this.imgLeft -= this.imgWidth;

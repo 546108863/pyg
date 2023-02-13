@@ -35,7 +35,8 @@
         </div>
         <!-- 搜索框、左边logo -->
         <div class="header-search w">
-            <img src="../../assets/images/logo.png" alt="logo">
+            <router-link to="/"><img src="../../assets/images/logo.png" alt="logo"></router-link>
+            
             <div class="search">
                 <input type="text">
                 <button>搜索</button>
@@ -473,7 +474,7 @@
         <div class="carousel">
             <ul class="clearfix">
                 <li class="carousel-prev">
-                    &gt; </li>
+                    &lt; </li>
                 <li class="carousel-item">
                     <a href="" class="carousel-item-img">
                         <img src="https://img13.360buyimg.com/n4/s160x160_jfs/t1/35013/24/20731/39025/63d4e1a9Fae58327d/be1362f48d7bc073.jpg"
@@ -528,7 +529,7 @@
                     </div>
                 </li>
                 <li class="carousel-next">
-                    > </li>
+                    &gt; </li>
             </ul>
         </div>
     </div>
@@ -986,10 +987,14 @@ export default {
                 text-align: center;
                 border: dashed 1px #999999;
                 margin-left: -1px;
+     
 
                 .carousel-item-img {
                     height: 188px;
                     width: 100%;
+                    img {
+                        margin-top: 10px;
+                    }
                 }
 
                 .carousel-item-name {

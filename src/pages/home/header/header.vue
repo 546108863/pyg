@@ -7,8 +7,8 @@
 </template>
 
 <script>
-import HeaderNav from './HeaderNav/index.vue'
-import HeaderContainer from './HeaderContainer/index.vue'
+import HeaderNav from './HeaderNav/HeaderNav.vue'
+import HeaderContainer from './HeaderContainer/HeaderContainer.vue'
 
 export default {
     name:'Header',

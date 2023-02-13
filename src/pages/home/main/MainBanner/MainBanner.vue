@@ -7,9 +7,9 @@
 </template>
 
 <script>
-import BannerLeftNav from "./BannerLeftNav/index.vue"
-import SliderBanner from "./SliderBanner/index.vue"
-import BannerRightContainer from "./BannerRightContainer/index.vue"
+import BannerLeftNav from "./BannerLeftNav/BannerLeftNav.vue"
+import SliderBanner from "./SliderBanner/SliderBanner.vue"
+import BannerRightContainer from "./BannerRightContainer/BannerRightContainer.vue"
 
 
 export default {

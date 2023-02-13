@@ -178,9 +178,9 @@
                     </dl>
                     <div class="choose_btns">
                         <div class="choose_amount">
-                            <input type="text" value="1">
-                            <a href="javascript:;" class="add">+</a>
-                            <a href="javascript:;" class="reduce">-</a>
+                            <input type="text" v-model="skuNum" @change="numChange">
+                            <button class="add" @click="skuNum++" :class="skuNum==200?'ban':''">+</button>
+                            <button class="reduce" @click="skuNum=--skuNum<1?1:skuNum--" :class="skuNum==1?'ban':''">-</button>
                         </div>
                         <router-link to="/cart" class="addcar">加入购物车</router-link>
                     </div>
@@ -304,7 +304,39 @@ export default {
     components: {
         Bottom,
         Zoom
+    },
+    data() {
+        return {
+            skuNum:1,
+        }
+    },
+    methods: {
+        numChange(e) {
+            // let value = e.target.value;
+            // if (isNaN(value * 1) || value < 1) {
+            //    this.skuNum = 1;
+            // } else {
+            //     this.skuNum = parseInt(value);  
+            // }
+        }
+    },
+    watch:{
+        skuNum:{
+            handler(newValue,oldValue) {
+                if(isNaN(newValue * 1)){
+                    this.skuNum = parseInt(oldValue);
+                }else{
+
+                    this.skuNum = parseInt(newValue)>200?200:parseInt(newValue);
+                }
+                if (isNaN(this.skuNum)) {
+                    this.skuNum = 1;
+                }
+                console.log(newValue,oldValue);
+            }
+        }
     }
+
 }
 
 </script>
@@ -654,7 +686,7 @@ body {
 .choose_amount {
 	position: relative;
 	float: left;
-	width: 50px;
+	width: 49px;
 	height: 46px;
 	background-color: pink;
 }
@@ -666,10 +698,10 @@ body {
 }
 .add,
 .reduce {
-	position: absolute;
-	right: 0;
+    position: absolute;
+    right: 0;
 	width: 15px;
-	height: 22px;
+	height: 23px;
 	border: 1px solid #ccc;
 	background-color: #f1f1f1;
 	text-align: center;
@@ -677,10 +709,12 @@ body {
 }
 .add {
 	top: 0;
-	
 }
 .reduce {
-	bottom: 0;
+    bottom: 0;
+}
+.ban {
+    color: #666;
 	/*禁止鼠标样式*/
 	cursor: not-allowed;   /* pointer  小手  move  移动  */
 }
