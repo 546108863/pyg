@@ -4,6 +4,7 @@ import Login from "../pages/login/login"
 import Register from '../pages/register/register'
 import Cart from '../pages/cart/cart'
 import ShopDetail from '../pages/shopDetail/shopDetail'
+import  CartAccess from '../pages/cartAccess/cartAccess'
 
 export default new VueRouter({
     routes: [
@@ -26,6 +27,10 @@ export default new VueRouter({
         {
             path: "/shopdetail",
             component: ShopDetail
+        },
+        {
+            path: "/cartaccess",
+            component:CartAccess
         }
 
     ]
