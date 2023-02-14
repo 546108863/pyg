@@ -177,26 +177,40 @@
             <dl class="choose_color">
               <dt>{{ skuDetail.skuProperty[0].pTitle }}</dt>
               <dd>
-                <button :class="item.isChecked?'current':''" 
-                v-for="(item,index) in skuDetail.skuProperty[0].pValue" 
-                :key="index" @click="chooseColor(item,skuDetail.skuProperty[0].pValue)">{{item.pName}}</button>
+                <button
+                  :class="item.isChecked ? 'current' : ''"
+                  v-for="(item, index) in skuDetail.skuProperty[0].pValue"
+                  :key="index"
+                  @click="chooseColor(item, skuDetail.skuProperty[0].pValue)"
+                >
+                  {{ item.pName }}
+                </button>
               </dd>
             </dl>
             <dl class="choose_version">
               <dt>{{ skuDetail.skuProperty[1].pTitle }}</dt>
               <dd>
-                <button  :class="item.isChecked?'current':''"
-                v-for="(item,index) in skuDetail.skuProperty[1].pValue"
-                :key="index" @click="chooseVersion(item,skuDetail.skuProperty[1].pValue)">{{item.pName}}</button>
+                <button
+                  :class="item.isChecked ? 'current' : ''"
+                  v-for="(item, index) in skuDetail.skuProperty[1].pValue"
+                  :key="index"
+                  @click="chooseVersion(item, skuDetail.skuProperty[1].pValue)"
+                >
+                  {{ item.pName }}
+                </button>
               </dd>
             </dl>
             <dl class="choose_type">
               <dt>{{ skuDetail.skuProperty[2].pTitle }}</dt>
-              <dd> 
-                <button :class="item.isChecked?'current':''" 
-                v-for="(item,index) in skuDetail.skuProperty[2].pValue"
-                :key="index"
-                @click="buyMethod(item,skuDetail.skuProperty[2].pValue)">{{item.pName}}</button>
+              <dd>
+                <button
+                  :class="item.isChecked ? 'current' : ''"
+                  v-for="(item, index) in skuDetail.skuProperty[2].pValue"
+                  :key="index"
+                  @click="buyMethod(item, skuDetail.skuProperty[2].pValue)"
+                >
+                  {{ item.pName }}
+                </button>
               </dd>
             </dl>
             <div class="choose_btns">
@@ -339,103 +353,83 @@ export default {
     return {
       skuNum: 1,
       skuDetail: {
-        skuId:1,
-        skuName:"Apple iPhone 6s（A1700）64G玫瑰金色 移动通信电信4G手机",
+        skuId: 1,
+        skuName: "Apple iPhone 6s（A1700）64G玫瑰金色 移动通信电信4G手机",
         skuProperty: [
           {
-            pTitle:"选择颜色",
-            pValue:[
-              { pName:"玫瑰金",
-                isChecked:1,
-                pPrice:0  
-              },
-              { pName:"白色",
-                isChecked:0,
-                pPrice:0  
-              },
-              { pName:"黑色",
-                isChecked:0,
-                pPrice:0  
-              },
-              { pName:"银灰色",
-                isChecked:0,
-                pPrice:0  
-              },
-            ]
+            pTitle: "选择颜色",
+            pValue: [
+              { pName: "玫瑰金", isChecked: 1, pPrice: 0 },
+              { pName: "白色", isChecked: 0, pPrice: 0 },
+              { pName: "黑色", isChecked: 0, pPrice: 0 },
+              { pName: "银灰色", isChecked: 0, pPrice: 0 },
+            ],
           },
           {
-            pTitle:"选择版本",
-            pValue:[
-              { pName:"128GB",
-                isChecked:1,
-                pPrice:5299   
-              },
-              { pName:"256GB",
-                isChecked:0,
-                pPrice:6099  
-              },
-              { pName:"512GB",
-                isChecked:0,
-                pPrice:7099  
-              },
-              { pName:"1TB",
-                isChecked:0,
-                pPrice:8299  
-              }
-            ]
+            pTitle: "选择版本",
+            pValue: [
+              { pName: "128GB", isChecked: 1, pPrice: 5299 },
+              { pName: "256GB", isChecked: 0, pPrice: 6099 },
+              { pName: "512GB", isChecked: 0, pPrice: 7099 },
+              { pName: "1TB", isChecked: 0, pPrice: 8299 },
+            ],
           },
           {
-            pTitle:"购买方式",
-            pValue:[
-              { pName:"官方标配",
-                isChecked:1,
-                pPrice:0   
-              },
-              { pName:"移动优惠购",
-                isChecked:0,
-                pPrice:-1000  
-              },
-              { pName:"电信优惠购",
-                isChecked:0,
-                pPrice:-1000  
-              }
-            ]
-          }
-        ]
+            pTitle: "购买方式",
+            pValue: [
+              { pName: "官方标配", isChecked: 1, pPrice: 0 },
+              { pName: "移动优惠购", isChecked: 0, pPrice: -1000 },
+              { pName: "电信优惠购", isChecked: 0, pPrice: -1000 },
+            ],
+          },
+        ],
       },
-      itemInfo:{
-        itemId:1,
-        itemImgUrl:require("../shopDetail/images/upload/s3.png"),
-        itemName:"Apple iPhone 6s（A1700）64G玫瑰金色 移动通信电信4G手机",
-        itemProperty:"S"
+      itemInfo: {
+        itemId: 1,
+        itemImgUrl: require("../shopDetail/images/upload/s3.png"),
+        itemName: "Apple iPhone 6s（A1700）64G玫瑰金色 移动通信电信4G手机",
+        itemProperty: { pColor: "", pSize: "" },
       },
-      sumPrice:0,
-      price:0
+      sumPrice: 0,
+      price: 0,
     };
   },
   methods: {
     toCart() {
-      sessionStorage.setItem("itemInfo",JSON.stringify(this.itemInfo));
-      this.$router.push({path:"/cartaccess",query:{skuNum:this.skuNum}})
+      sessionStorage.setItem("itemInfo", JSON.stringify(this.itemInfo));
+      this.$store.dispatch("addShopCart", {
+        skuId: this.itemInfo.itemId,
+        skuNum: this.skuNum,
+        skuProperty: {
+          skuColor: this.itemInfo.itemProperty.pColor,
+          skuSize: this.itemInfo.itemProperty.pSize,
+        },
+      });
+      this.$router.push({
+        path: "/cartaccess",
+        query: { skuNum: this.skuNum },
+      });
     },
-    chooseColor(property,propertyList) {
-      propertyList.forEach(element => {
+    chooseColor(property, propertyList) {
+      propertyList.forEach((element) => {
+        element.isChecked = 0;
+      });
+      property.isChecked = 1;
+      this.itemInfo.itemProperty.pColor = property.pName;
+    },
+    chooseVersion(property, propertyList) {
+      propertyList.forEach((element) => {
+        element.isChecked = 0;
+      });
+      property.isChecked = 1;
+      this.itemInfo.itemProperty.pSize = property.pName;
+    },
+    buyMethod(property, propertyList) {
+      propertyList.forEach((element) => {
         element.isChecked = 0;
       });
       property.isChecked = 1;
     },
-    chooseVersion(property,propertyList) {
-      propertyList.forEach(element => {
-        element.isChecked = 0;
-      });
-      property.isChecked = 1;
-    },
-    buyMethod(property,propertyList) {
-      propertyList.forEach(element => {
-        element.isChecked = 0;
-      });
-      property.isChecked = 1;
-    }
   },
   watch: {
     skuNum: {
@@ -451,20 +445,26 @@ export default {
       },
     },
     skuDetail: {
-      immediate:true,
-      deep:true,
-      handler(newValue,oldValue){
+      immediate: true,
+      deep: true,
+      handler(newValue, oldValue) {
         this.price = 0;
-        newValue.skuProperty.forEach((element)=>{
-          element.pValue.forEach((element)=>{
+        newValue.skuProperty.forEach((element) => {
+          element.pValue.forEach((element) => {
             if (element.isChecked) {
               this.price += element.pPrice;
             }
-          })
-        })
+          });
+        });
         this.sumPrice = this.price;
-      }
-    }
+      },
+    },
+  },
+  mounted() {
+    this.itemInfo.itemProperty.pColor =
+      this.skuDetail.skuProperty[0].pValue[0].pName;
+    this.itemInfo.itemProperty.pSize =
+      this.skuDetail.skuProperty[1].pValue[1].pName;
   },
 };
 </script>
