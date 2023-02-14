@@ -3,12 +3,16 @@ import Vue from "vue";
 import Vuex from "vuex";
 Vue.use(Vuex);
 
-const actions = {};
-const mutation = {};
-const state = {};
+import shopDetail from './shopDetail'
+import login from './login'
+import register from './register'
+import cart from './cart'
 
 export default new Vuex.Store({
-    actions,
-    mutation,
-    state
+    modules:{
+        shopDetail,
+        login,
+        register,
+        cart
+    }
 })

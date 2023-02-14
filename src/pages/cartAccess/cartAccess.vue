@@ -1,30 +1,48 @@
 <template>
-  <div class="main">
-    <div class="success-wrap">
-      <div class="w clearfix container">
-        <div class="success-text">商品已成功加入购物车！</div>
-        <a class="item-img">
-          <img src="" alt="" />
-        </a>
-        <div class="item-info">
-          <div class="item-name">
-            <a href=""
-              >ROG魔霸新锐 15.6英寸2.5K 165Hz游戏本笔记本电脑(R9-6900HX 液金导热
-              16G 512G RTX3060 140W)</a
-            >
+  <div>
+    <Header></Header>
+    <div class="main">
+      <div class="success-wrap">
+        <div class="w clearfix container">
+          <div class="success-text">商品已成功加入购物车！</div>
+            <a class="item-img">
+            <img :src="itemInfo.itemImgUrl" alt="" />
+            </a>
+          <div class="item-info">
+            <div class="item-name">
+              <a href="">{{ itemInfo.itemName }}</a>
+            </div>
+            <span class="item-num">数量：<i>{{ $route.query.skuNum }}</i></span>
           </div>
-          <span class="item-num">数量：<i>1</i></span>
+          <router-link :to="`/shopdetail?itemId=${itemInfo.itemId}`" class="btn-back btn">查看商品详情</router-link>
+          <router-link to="/cart" class="btn-addtocart btn">去购物车结算</router-link>
         </div>
-        <a href="" class="btn-back btn">查看商品详情</a>
-        <a href="" class="btn-addtocart btn">去购物车结算</a>
       </div>
     </div>
+    <Bottom></Bottom>
   </div>
+  
 </template>
 
 <script>
+import Bottom from '@/components/bottom.vue'
+import Header from '@/components/header/header.vue'
+
 export default {
   name: "cartAccess",
+  components:{
+    Bottom,
+    Header
+  },
+  data() {
+    return {
+    }
+  },
+  computed:{
+    itemInfo() {
+      return JSON.parse(sessionStorage.getItem("itemInfo"));
+    }
+  },
 };
 </script>
 

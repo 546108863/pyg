@@ -139,7 +139,6 @@ export default {
 <style scoped>
   .link {
     height: 100%;
-    margin-top: 36px;
     background-color: #f5f5f5;
 }
 

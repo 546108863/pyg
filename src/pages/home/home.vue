@@ -7,7 +7,7 @@
   </template>
   
   <script>
-  import Header from './header/header.vue'
+  import Header from '@/components/header/header.vue'
   import Main from './main/main.vue'
   import Bottom from '../../components/bottom.vue'
   

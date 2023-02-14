@@ -4,7 +4,7 @@
         <div class= "header-main">
             <!-- 头部左侧logo -->
             <div class="header-logo">
-                <img src="../../../../assets/images/logo.png" alt="logo">
+                <img src="@/assets/images/logo.png" alt="logo">
             </div>
             <!-- 头部搜索框 -->
             <div class="header-search">
@@ -27,9 +27,9 @@
             <div class="shopcar">
                 <div>
                     <ul>
-                        <li><img src="../../../../assets/images/shop.png" alt="购物车"></li>
+                        <li><img src="@/assets/images/shop.png" alt="购物车"></li>
                         <li><router-link to="/cart">我的购物车</router-link></li>
-                        <li><img src="../../../../assets/images/next.png" alt=""></li>
+                        <li><img src="@/assets/images/next.png" alt=""></li>
                     </ul>
                 </div>
                 <div class="count">8</div>

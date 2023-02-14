@@ -155,7 +155,7 @@
             <dl class="summary_price">
               <dt>价格</dt>
               <dd>
-                <i class="price">￥5299.00 </i>
+                <i class="price">￥{{ sumPrice }} </i>
 
                 <a href="#">降价通知</a>
 
@@ -175,32 +175,33 @@
               <dd>以旧换新，闲置手机回收 4G套餐超值抢 礼品购</dd>
             </dl>
             <dl class="choose_color">
-              <dt>选择颜色</dt>
+              <dt>{{ skuDetail.skuProperty[0].pTitle }}</dt>
               <dd>
-                <a href="javascript:;" class="current">玫瑰金</a>
-                <a href="javascript:;">金色</a>
-                <a href="javascript:;">白色</a>
-                <a href="javascript:;">土豪色</a>
+                <button :class="item.isChecked?'current':''" 
+                v-for="(item,index) in skuDetail.skuProperty[0].pValue" 
+                :key="index" @click="chooseColor(item,skuDetail.skuProperty[0].pValue)">{{item.pName}}</button>
               </dd>
             </dl>
             <dl class="choose_version">
-              <dt>选择版本</dt>
+              <dt>{{ skuDetail.skuProperty[1].pTitle }}</dt>
               <dd>
-                <a href="javascript:;" class="current">公开版</a>
-                <a href="javascript:;">移动4G</a>
+                <button  :class="item.isChecked?'current':''"
+                v-for="(item,index) in skuDetail.skuProperty[1].pValue"
+                :key="index" @click="chooseVersion(item,skuDetail.skuProperty[1].pValue)">{{item.pName}}</button>
               </dd>
             </dl>
             <dl class="choose_type">
-              <dt>购买方式</dt>
-              <dd>
-                <a href="javascript:;" class="current">官方标配</a>
-                <a href="javascript:;">移动优惠购</a>
-                <a href="javascript:;">电信优惠购</a>
+              <dt>{{ skuDetail.skuProperty[2].pTitle }}</dt>
+              <dd> 
+                <button :class="item.isChecked?'current':''" 
+                v-for="(item,index) in skuDetail.skuProperty[2].pValue"
+                :key="index"
+                @click="buyMethod(item,skuDetail.skuProperty[2].pValue)">{{item.pName}}</button>
               </dd>
             </dl>
             <div class="choose_btns">
               <div class="choose_amount">
-                <input type="text" v-model="skuNum" @change="numChange" />
+                <input type="text" v-model="skuNum" />
                 <button
                   class="add"
                   @click="skuNum++"
@@ -216,9 +217,7 @@
                   -
                 </button>
               </div>
-              <router-link to="/cartaccess" class="addcar"
-                >加入购物车</router-link
-              >
+              <button class="addcar" @click="toCart">加入购物车</button>
             </div>
           </div>
         </div>
@@ -339,17 +338,104 @@ export default {
   data() {
     return {
       skuNum: 1,
+      skuDetail: {
+        skuId:1,
+        skuName:"Apple iPhone 6s（A1700）64G玫瑰金色 移动通信电信4G手机",
+        skuProperty: [
+          {
+            pTitle:"选择颜色",
+            pValue:[
+              { pName:"玫瑰金",
+                isChecked:1,
+                pPrice:0  
+              },
+              { pName:"白色",
+                isChecked:0,
+                pPrice:0  
+              },
+              { pName:"黑色",
+                isChecked:0,
+                pPrice:0  
+              },
+              { pName:"银灰色",
+                isChecked:0,
+                pPrice:0  
+              },
+            ]
+          },
+          {
+            pTitle:"选择版本",
+            pValue:[
+              { pName:"128GB",
+                isChecked:1,
+                pPrice:5299   
+              },
+              { pName:"256GB",
+                isChecked:0,
+                pPrice:6099  
+              },
+              { pName:"512GB",
+                isChecked:0,
+                pPrice:7099  
+              },
+              { pName:"1TB",
+                isChecked:0,
+                pPrice:8299  
+              }
+            ]
+          },
+          {
+            pTitle:"购买方式",
+            pValue:[
+              { pName:"官方标配",
+                isChecked:1,
+                pPrice:0   
+              },
+              { pName:"移动优惠购",
+                isChecked:0,
+                pPrice:-1000  
+              },
+              { pName:"电信优惠购",
+                isChecked:0,
+                pPrice:-1000  
+              }
+            ]
+          }
+        ]
+      },
+      itemInfo:{
+        itemId:1,
+        itemImgUrl:require("../shopDetail/images/upload/s3.png"),
+        itemName:"Apple iPhone 6s（A1700）64G玫瑰金色 移动通信电信4G手机",
+        itemProperty:"S"
+      },
+      sumPrice:0,
+      price:0
     };
   },
   methods: {
-    numChange(e) {
-      // let value = e.target.value;
-      // if (isNaN(value * 1) || value < 1) {
-      //    this.skuNum = 1;
-      // } else {
-      //     this.skuNum = parseInt(value);
-      // }
+    toCart() {
+      sessionStorage.setItem("itemInfo",JSON.stringify(this.itemInfo));
+      this.$router.push({path:"/cartaccess",query:{skuNum:this.skuNum}})
     },
+    chooseColor(property,propertyList) {
+      propertyList.forEach(element => {
+        element.isChecked = 0;
+      });
+      property.isChecked = 1;
+    },
+    chooseVersion(property,propertyList) {
+      propertyList.forEach(element => {
+        element.isChecked = 0;
+      });
+      property.isChecked = 1;
+    },
+    buyMethod(property,propertyList) {
+      propertyList.forEach(element => {
+        element.isChecked = 0;
+      });
+      property.isChecked = 1;
+    }
   },
   watch: {
     skuNum: {
@@ -362,9 +448,23 @@ export default {
         if (isNaN(this.skuNum)) {
           this.skuNum = 1;
         }
-        console.log(newValue, oldValue);
       },
     },
+    skuDetail: {
+      immediate:true,
+      deep:true,
+      handler(newValue,oldValue){
+        this.price = 0;
+        newValue.skuProperty.forEach((element)=>{
+          element.pValue.forEach((element)=>{
+            if (element.isChecked) {
+              this.price += element.pPrice;
+            }
+          })
+        })
+        this.sumPrice = this.price;
+      }
+    }
   },
 };
 </script>
@@ -645,8 +745,9 @@ body {
   float: left;
 }
 .summary dt {
-  width: 60px;
+  width: 70px;
   padding-left: 10px;
+  margin-right: 10px;
   line-height: 36px;
 }
 .summary_price,
@@ -686,7 +787,7 @@ body {
 .summary_support dd {
   line-height: 36px;
 }
-.choose_color a {
+.choose_color button {
   display: inline-block;
   width: 80px;
   height: 41px;
@@ -695,14 +796,14 @@ body {
   text-align: center;
   line-height: 41px;
 }
-.summary a.current {
+.summary .current {
   border-color: #c81623;
 }
 .choose_version {
   margin: 10px 0;
 }
-.choose_version a,
-.choose_type a {
+.choose_version button,
+.choose_type button {
   display: inline-block;
   height: 32px;
   padding: 0 12px;

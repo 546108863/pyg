@@ -107,6 +107,7 @@ export default {
 .rmfq {
     height: 314px;
     margin-top: 30px;
+    margin-bottom: 36px;
 }
 
 .rmfq-header {
