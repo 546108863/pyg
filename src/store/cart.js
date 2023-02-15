@@ -1,6 +1,18 @@
-const actions = {};
-const mutations = {};
-const state = {};
+const actions = {
+    getShopCartList({commit}) {
+        commit('getShopCartList');
+    }
+};
+const mutations = {
+    getShopCartList(){
+        localStorage.getItem(userShopCartList).forEach(element => {
+            
+        });
+    }
+};
+const state = {
+    ShopCartList:{}
+};
 const getters = {};
 
 export default {
