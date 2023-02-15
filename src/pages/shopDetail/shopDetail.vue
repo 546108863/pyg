@@ -447,7 +447,7 @@ export default {
     skuDetail: {
       immediate: true,
       deep: true,
-      handler(newValue, oldValue) {
+      handler(newValue) {
         this.price = 0;
         newValue.skuProperty.forEach((element) => {
           element.pValue.forEach((element) => {
@@ -464,7 +464,7 @@ export default {
     this.itemInfo.itemProperty.pColor =
       this.skuDetail.skuProperty[0].pValue[0].pName;
     this.itemInfo.itemProperty.pSize =
-      this.skuDetail.skuProperty[1].pValue[1].pName;
+      this.skuDetail.skuProperty[1].pValue[0].pName;
   },
 };
 </script>

@@ -326,7 +326,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapState } from "vuex";
 import Bottom from "../../components/bottom.vue";
 
 export default {
@@ -335,22 +335,15 @@ export default {
     Bottom,
   },
   data() {
-    return {
-      
-    }
+    return {};
   },
-  methods: {
-    
-  },
+  methods: {},
   computed: {
-    shopCartList() {
-
-    }
+    ...mapState(["shopCartList"]),
   },
   mounted() {
-    this.$store.dispatch('getShopCartList');
+    this.$store.dispatch("getShopCartList");
   },
-  
 };
 </script>
 

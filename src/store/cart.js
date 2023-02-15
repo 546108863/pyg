@@ -4,14 +4,12 @@ const actions = {
     }
 };
 const mutations = {
-    getShopCartList(){
-        localStorage.getItem(userShopCartList).forEach(element => {
-            
-        });
+    getShopCartList() {
+        state.shopCartList = JSON.parse(localStorage.getItem("userShopCartListInfo")).userShopCartList;
     }
 };
 const state = {
-    ShopCartList:{}
+    shopCartList: []
 };
 const getters = {};
 
