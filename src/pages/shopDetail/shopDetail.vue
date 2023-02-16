@@ -397,9 +397,11 @@ export default {
   methods: {
     toCart() {
       sessionStorage.setItem("itemInfo", JSON.stringify(this.itemInfo));
-      this.$store.dispatch("addShopCart", {
-        skuId: this.itemInfo.itemId,
+      this.$store.dispatch("shopDetail/addShopCart", {
+        skuId: this.skuDetail.skuId,
+        skuName: this.skuDetail.skuName,
         skuNum: this.skuNum,
+        skuPrice: this.sumPrice,
         skuProperty: {
           skuColor: this.itemInfo.itemProperty.pColor,
           skuSize: this.itemInfo.itemProperty.pSize,
