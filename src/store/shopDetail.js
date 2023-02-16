@@ -16,7 +16,7 @@ const mutations = {
                     element.skuProperty.skuColor === value.skuProperty.skuColor &&
                     element.skuProperty.skuSize === value.skuProperty.skuSize) {
                     element.skuNum += value.skuNum;
-                    // element.list.cartIsChecked = "checked";
+                    element.cartIsChecked = 1;
                     flag = true;
                 }
             });
@@ -28,7 +28,7 @@ const mutations = {
             list.skuId = value.skuId;
             list.skuNum = value.skuNum;
             list.skuPrice = value.skuPrice;
-            // list.cartIsChecked = "checked";
+            list.cartIsChecked = 1;
             list.skuProperty.skuColor = value.skuProperty.skuColor;
             list.skuProperty.skuSize = value.skuProperty.skuSize;
             state.userShopCartListInfo.userShopCartList.push(list);

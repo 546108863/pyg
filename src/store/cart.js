@@ -2,8 +2,26 @@ const actions = {
     getShopCartInfo({commit}) {
         commit('GETSHOPCARTINFO');
     },
-    changeSkuNum({commit},value) {
-        commit('CHANGESKUNUM',value);
+    changeSkuNum({commit}) {
+        commit('LOCALSAVE');
+    },
+    deleteItem({ commit }, value) {
+        commit('DELETEITEM', value);
+    },
+    changeChecked({ commit }) {
+        commit('LOCALSAVE');
+    },
+    deleteAllChecked({ dispatch, state }) {
+        let index = -1;
+        let list = state.shopCartInfo.shopCartList;
+        let arrayLength = list.length;
+            for (let i = 0; i < arrayLength; i++) {
+                index++;
+                if (list[index].cartIsChecked) {
+                    dispatch('deleteItem', index);
+                    index--;
+                }
+            }
     }
 };
 const mutations = {
@@ -12,16 +30,16 @@ const mutations = {
         state.shopCartInfo.skuName = info.skuName;
         state.shopCartInfo.shopCartList = info.userShopCartList;
     },
-    CHANGESKUNUM(state,value) {
+    LOCALSAVE(state) {
         let info = JSON.parse(localStorage.getItem("userShopCartListInfo"));
-        state.shopCartInfo.shopCartList.forEach(element => {
-            if (element.skuProperty.skuColor === value.sku.skuProperty.skuColor &&
-                element.skuProperty.skuSize === value.sku.skuProperty.skuSize) {
-                // element.sku.skuNum += value.disNum;
-            }
-        });
         info.userShopCartList = state.shopCartInfo.shopCartList;
-        localStorage.setItem("userShopCartListInfo", JSON.stringify(info))
+        localStorage.setItem("userShopCartListInfo", JSON.stringify(info));
+    },
+    DELETEITEM(state, value) {
+        let info = JSON.parse(localStorage.getItem("userShopCartListInfo"));
+        state.shopCartInfo.shopCartList.splice(value, 1);
+        info.userShopCartList = state.shopCartInfo.shopCartList;
+        localStorage.setItem("userShopCartListInfo", JSON.stringify(info));
     }
 };
 const state = {

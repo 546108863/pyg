@@ -368,10 +368,10 @@ export default {
           {
             pTitle: "选择版本",
             pValue: [
-              { pName: "128GB", isChecked: 1, pPrice: 5299 },
-              { pName: "256GB", isChecked: 0, pPrice: 6099 },
-              { pName: "512GB", isChecked: 0, pPrice: 7099 },
-              { pName: "1TB", isChecked: 0, pPrice: 8299 },
+              { pName: "128GB", isChecked: 1, pPrice: 5299.0 },
+              { pName: "256GB", isChecked: 0, pPrice: 6099.0 },
+              { pName: "512GB", isChecked: 0, pPrice: 7099.0 },
+              { pName: "1TB", isChecked: 0, pPrice: 8299.0 },
             ],
           },
           {
