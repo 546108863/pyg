@@ -59,7 +59,7 @@
         <h3>全部商品 <span>11</span></h3>
         <ul class="cart-category">
           <li>
-            <input type="checkbox" id="all" /><label for="all">全选</label>
+            <input type="checkbox" id="all" @change="allChecked" :checked="isChecked"/><label for="all">全选</label>
           </li>
           <li>商品</li>
           <li>单价(元)</li>
@@ -72,7 +72,7 @@
       <div class="cart-tbody" v-if="shopCartInfo.shopCartList.length">
         <!-- 同一家店商品头部选择框 -->
         <div class="shop">
-          <input type="checkbox" />
+          <input type="checkbox" :checked="isChecked"/>
           <span class="shop-text">品优购自营</span>
           <div class="shop-extra">
             <span>运费:￥6.00</span>
@@ -168,7 +168,7 @@
       <div class="cart-toolbar w">
         <div class="cart-floatbar-l">
           <div class="cart-floatbar-checkbox">
-            <input type="checkbox" />全选
+            <input type="checkbox" id="floatbar-all" @change="allChecked" :checked="isChecked"/><label for="floatbar-all">全选</label>
           </div>
           <div class="cart-floatbar-operation">
             <button @click="deleteAllChecked">删除选中的商品</button>
@@ -180,12 +180,12 @@
           <div class="price-sum-btn"><button>结算</button></div>
           <div class="price-sum">
             <div class="price-sum-amount">
-              <span>已选择1件商品</span>
+              <span>已选择{{itemCheckedNum}}件商品</span>
               <span>总价(不包含运费):</span>
-              <span class="price-show">￥40.26</span>
+              <span class="price-show">￥{{ sumPrice }}</span>
             </div>
             <div class="price-sum-reduce">
-              <div>已节省:<span>-￥20.00</span></div>
+              <div>已节省:<span>-￥0.00</span></div>
             </div>
           </div>
         </div>
@@ -306,6 +306,7 @@ export default {
   data() {
     return {
       skuNumChangeFlag: true,
+	  isChecked : false
     };
   },
   methods: {
@@ -352,16 +353,49 @@ export default {
       let checked = e.target.checked ? 1 : 0;
       item.cartIsChecked = checked;
       this.$store.dispatch("cart/changeChecked");
+	  this.watchChecked();
     },
     deleteAllChecked() {
       this.$store.dispatch("cart/deleteAllChecked");
     },
+	allChecked(e) {
+		this.isChecked = !this.isChecked;
+		this.$store.dispatch('cart/allChecked',this.isChecked);
+	},
+	watchChecked() {
+		this.isChecked = true;
+		this.shopCartInfo.shopCartList.forEach(item => {
+			if(!item.cartIsChecked) {
+				this.isChecked = false;
+			}
+		});
+	}
+	
   },
   computed: {
-    ...mapState("cart", ["shopCartInfo"]),
+  ...mapState("cart", ["shopCartInfo"]),
+	sumPrice(){
+		let price = 0;
+		this.shopCartInfo.shopCartList.forEach(item => {
+			if(item.cartIsChecked) {
+				price += item.skuNum*item.skuPrice;
+			}
+		})
+		return price;
+	},
+	itemCheckedNum(){
+		let itemNum = 0;
+		this.shopCartInfo.shopCartList.forEach(item => {
+			if(item.cartIsChecked) {
+				itemNum += item.skuNum;
+			}
+		})
+		return itemNum;
+	}
   },
   mounted() {
     this.$store.dispatch("cart/getShopCartInfo");
+	this.watchChecked();
   },
 };
 </script>
@@ -699,11 +733,9 @@ button {
 
       .price-sum {
         float: right;
-        width: 234px;
         margin: 10px 10px 0 0;
 
         .price-sum-amount {
-          float: right;
 
           .price-show {
             font-size: 16px;
