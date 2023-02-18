@@ -18,15 +18,15 @@
             <table align="middle" cellpadding="0" cellspacing="0">
                 <tr>
                     <td class="cell1"><label for="userName">用户名：</label></td>
-                    <td><input type="text" id="userName" require="required" autofocus v-model="userInfo.userName"></td>
+                    <td><input type="text" id="userName" require="required" autofocus v-model="userInfo.userName" autocomplete="off" @focusout="verifyUserName"></td>
                 </tr>
                 <tr>
                     <td class="cell1"><label for="phoneNumber">手机号：</label></td>
-                    <td><input type="text" id="phoneNumber" maxlength="11" v-model="userInfo.phoneNumber"></td>
+                    <td><input type="text" id="phoneNumber" maxlength="11" v-model="userInfo.phoneNumber" autocomplete="off" @focusout="verifyUserName"></td>
                 </tr>
                 <tr>
                     <td class="cell1"><label for="code">短信验证码：</label></td>
-                    <td><input type="text" id="code" v-model="userInfo.code"></td>
+                    <td><input type="text" id="code" v-model="userInfo.phoneCode" autocomplete="off"><button class="getCode" @click="getCode">获取验证码</button></td>
                 </tr>
                 <tr>
                     <td class="cell1"><label for="loginPassword">登录密码：</label></td>
@@ -77,6 +77,8 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
+
 export default {
     name: "register",
     data() {
@@ -84,7 +86,7 @@ export default {
             userInfo: {
                 userName: "",
                 phoneNumber: "",
-                code: "",
+                phoneCode: "",
                 loginPassword: "",
                 comfirmPassword: "",
                 agree:false
@@ -92,10 +94,38 @@ export default {
         }
     },
     methods: {
+        getCode(){
+            this.$store.dispatch('register/getCode');
+            this.userInfo.phoneCode = this.code;
+        },
         commit() {
-            
+            const {userName,phoneNumber,phoneCode,loginPassword,comfirmPassword} = this.userInfo;
+            let flag = false;
+            if (this.userInfo.agree) {
+                if (userName&&phoneNumber&&phoneCode&&loginPassword&&comfirmPassword) {
+                    if (loginPassword===comfirmPassword) {
+                        this.codeArray.forEach(code => {
+                            if (code === phoneCode) {
+                                this.$store.dispatch('register/saveUserInfo',{userName,phoneNumber,comfirmPassword});
+                                flag = true;
+                            }
+                        });
+                        if(!flag) {
+                            alert("验证码不正确,请重新输入");
+                        }
+                    } else {
+                        alert("输入密码不一致");
+                    }
+                }
+            } else {
+                alert("请阅读并同意注册协议")
+            }
         }
-    }
+        
+    },
+    computed: {
+        ...mapState("register", ["code","codeArray"]),
+    },
 }
 </script>
 
@@ -162,6 +192,10 @@ export default {
             text-align: right;
         }
 
+        .getCode {
+            height: 34px;
+            border: solid 1px #666666;
+        }
         .commit {
             text-align: center;
         }

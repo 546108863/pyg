@@ -15,13 +15,19 @@ const actions = {
         let index = -1;
         let list = state.shopCartInfo.shopCartList;
         let arrayLength = list.length;
-            for (let i = 0; i < arrayLength; i++) {
-                index++;
-                if (list[index].cartIsChecked) {
-                    dispatch('deleteItem', index);
-                    index--;
-                }
+        for (let i = 0; i < arrayLength; i++) {
+            index++;
+            if (list[index].cartIsChecked) {
+                dispatch('deleteItem', index);
+                index--;
             }
+        }
+    },
+    allChecked({ dispatch, state },isChecked){
+        state.shopCartInfo.shopCartList.forEach(property => {
+                property.cartIsChecked = isChecked;
+        });
+        dispatch('changeChecked');
     }
 };
 const mutations = {
@@ -40,6 +46,9 @@ const mutations = {
         state.shopCartInfo.shopCartList.splice(value, 1);
         info.userShopCartList = state.shopCartInfo.shopCartList;
         localStorage.setItem("userShopCartListInfo", JSON.stringify(info));
+    },
+    ALLCHECKED(state,isChecked) {
+        
     }
 };
 const state = {
