@@ -95,7 +95,7 @@ export default {
     },
     methods: {
         getCode(){
-            this.$store.dispatch('register/getCode');
+            this.$store.dispatch('user/getCode');
             this.userInfo.phoneCode = this.code;
         },
         commit() {
@@ -106,7 +106,7 @@ export default {
                     if (loginPassword===comfirmPassword) {
                         this.codeArray.forEach(code => {
                             if (code === phoneCode) {
-                                this.$store.dispatch('register/saveUserInfo',{userName,phoneNumber,comfirmPassword});
+                                this.$store.dispatch('user/saveUserInfo',{userName,phoneNumber,comfirmPassword});
                                 flag = true;
                             }
                         });
@@ -124,7 +124,7 @@ export default {
         
     },
     computed: {
-        ...mapState("register", ["code","codeArray"]),
+        ...mapState("user", ["code","codeArray"]),
     },
 }
 </script>
