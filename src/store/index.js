@@ -4,14 +4,14 @@ import Vuex from "vuex";
 Vue.use(Vuex);
 
 import shopDetail from './shopDetail'
-import login from './login'
+import user from './user'
 import register from './register'
 import cart from './cart'
 
 export default new Vuex.Store({
     modules:{
         shopDetail,
-        login,
+        user,
         register,
         cart
     }
