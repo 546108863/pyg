@@ -3,42 +3,7 @@
     <!-- 头部 -->
     <div class="header">
       <!-- 头部最上边导航栏 -->
-      <div class="header-top-nav">
-        <div class="w">
-          <!-- 头部左侧注册登录 -->
-          <div class="left">
-            <ul>
-              <li>品优购欢迎您!</li>
-              <li>
-                <router-link to="/login" class="entry">请登陆</router-link>
-              </li>
-              <li>
-                <router-link to="/register" class="register"
-                  >免费注册</router-link
-                >
-              </li>
-            </ul>
-          </div>
-          <!-- 头部右边导航栏 -->
-          <div class="right-nav">
-            <ul>
-              <li><a href="#">我的订单</a></li>
-              <li class="spacer"></li>
-              <li><a href="#">我的品优购</a><span class="iconfont"></span></li>
-              <li class="spacer"></li>
-              <li><a href="#">品优购会员</a></li>
-              <li class="spacer"></li>
-              <li><a href="#">企业采购</a></li>
-              <li class="spacer"></li>
-              <li><a href="#">关注品优购</a><span class="iconfont"></span></li>
-              <li class="spacer"></li>
-              <li><a href="#">客户服务</a><span class="iconfont"></span></li>
-              <li class="spacer"></li>
-              <li><a href="#">网站导航</a><span class="iconfont"></span></li>
-            </ul>
-          </div>
-        </div>
-      </div>
+      <HeaderNav></HeaderNav>
       <!-- 搜索框、左边logo -->
       <div class="header-search w">
         <router-link to="/"
@@ -306,11 +271,13 @@
 
 <script>
 import { mapState } from "vuex";
-import Bottom from "../../components/bottom.vue";
+import HeaderNav from "@/components/header/HeaderNav/HeaderNav.vue";
+import Bottom from "@/components/bottom.vue";
 
 export default {
   name: "cart",
   components: {
+    HeaderNav,
     Bottom,
   },
   data() {
@@ -419,7 +386,7 @@ button {
   float: left;
   margin-top: 20px;
 }
-
+// 头部
 .header {
   .header-search {
     height: 80px;

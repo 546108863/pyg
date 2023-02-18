@@ -1,8 +1,8 @@
 <template>
   <div>
     <div class="header">
-      <div class="w" style="height: 100%">
-        <img src="./images/logo.png" alt="" style="margin-top: 10px" />
+      <div class="w">
+        <router-link to="/"><img src="./images/logo.png" alt="" style="margin-top: 10px" /></router-link>
       </div>
     </div>
     <div class="middle">
@@ -123,16 +123,12 @@ export default {
   },
   methods: {
     login() {
-      let result = this.$store.dispatch("user/login", {
+      this.$store.dispatch("user/login", {
         userId: this.userId,
         userPassword: this.userPassword,
         isAutoEntry: this.isAutoEntry,
       });
-      if (result) {
-        this.$router.push("/");
-      } else {
-        alert("用户名或密码错误");
-      }
+      this.$router.push("/");
     },
   },
 };

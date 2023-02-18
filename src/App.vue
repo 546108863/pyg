@@ -6,68 +6,71 @@
 </template>
 
 <script>
-
 export default {
-  name: 'App',
-}
+  name: "App",
+};
 </script>
 
 <style>
-    * {
-    margin: 0;
-    padding: 0;
+* {
+  margin: 0;
+  padding: 0;
 }
 
 .body {
-    background-color: #ffffff;
+  background-color: #ffffff;
 }
 
 .w {
-    width: 1200px;
-    margin: 0 auto;
+  width: 1200px;
+  margin: 0 auto;
 }
 
 li {
-    list-style: none;
+  list-style: none;
 }
 
 a {
-    font-size: 12px;
-    color: #666666;
-    font-family: "songti";
-    text-decoration: none;
+  font-size: 12px;
+  color: #666666;
+  font-family: "songti";
+  text-decoration: none;
 }
 
 input {
-    outline: none;
+  outline: none;
+}
+button {
+  border: none;
 }
 
 @font-face {
-    font-family: 'iconfont';
-    src: url('./assets/styles/fonts/iconfont.ttf?t=1675938370759') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-    font-display: block;
+  font-family: "iconfont";
+  src: url("./assets/styles/fonts/iconfont.ttf?t=1675938370759")
+    format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
 }
 
 i,
 em {
-    font-style: normal;
+  font-style: normal;
 }
 
 .iconfont {
-    font-family: 'iconfont'!important;
-    font-size: 12px;
-    color: #666666;
+  font-family: "iconfont" !important;
+  font-size: 12px;
+  color: #666666;
 }
 .clearfix::before,
 .clearfix::after {
-    content: '';
-    display: table;
-    clear: both;
+  content: "";
+  display: table;
+  clear: both;
 }
 /*让button 按钮 变成小手*/
 button {
-    cursor: pointer;
+  cursor: pointer;
 }
 </style>
