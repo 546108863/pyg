@@ -18,23 +18,23 @@
             <table align="middle" cellpadding="0" cellspacing="0">
                 <tr>
                     <td class="cell1"><label for="userName">用户名：</label></td>
-                    <td><input type="text" id="userName" require="required" autofocus v-model="userInfo.userName" autocomplete="off" @focusout="verifyUserName"></td>
+                    <td><input type="text" id="userName" required autofocus v-model="userInfo.userName" autocomplete="off" @blur="verifyUserName"></td>
                 </tr>
                 <tr>
                     <td class="cell1"><label for="phoneNumber">手机号：</label></td>
-                    <td><input type="text" id="phoneNumber" maxlength="11" v-model="userInfo.phoneNumber" autocomplete="off" @focusout="verifyUserName"></td>
+                    <td><input type="text" id="phoneNumber" required maxlength="11" v-model="userInfo.phoneNumber" autocomplete="off" @blur="verifyUserName"></td>
                 </tr>
                 <tr>
                     <td class="cell1"><label for="code">短信验证码：</label></td>
-                    <td><input type="text" id="code" v-model="userInfo.phoneCode" autocomplete="off"><button class="getCode" @click="getCode">获取验证码</button></td>
+                    <td><input type="text" id="code" v-model="userInfo.phoneCode" required autocomplete="off"><button class="getCode" @click="getCode">获取验证码</button></td>
                 </tr>
                 <tr>
                     <td class="cell1"><label for="loginPassword">登录密码：</label></td>
-                    <td><input type="password" id="loginPassword" v-model="userInfo.loginPassword"></td>
+                    <td><input type="password" id="loginPassword" required v-model="userInfo.loginPassword"></td>
                 </tr>
                 <tr>
                     <td class="cell1"><label for="comfirmPassword">确认密码：</label></td>
-                    <td><input type="password" id="comfirmPassword" v-model="userInfo.comfirmPassword"></td>
+                    <td><input type="password" id="comfirmPassword" required v-model="userInfo.confirmPassword"></td>
                 </tr>
                 <tr>
                     <td class="cell1"><input type="checkbox" id="agree" v-model="userInfo.agree"></td>
@@ -88,7 +88,7 @@ export default {
                 phoneNumber: "",
                 phoneCode: "",
                 loginPassword: "",
-                comfirmPassword: "",
+                confirmPassword: "",
                 agree:false
             }
         }
@@ -99,14 +99,14 @@ export default {
             this.userInfo.phoneCode = this.code;
         },
         commit() {
-            const {userName,phoneNumber,phoneCode,loginPassword,comfirmPassword} = this.userInfo;
+            const {userName,phoneNumber,phoneCode,loginPassword,confirmPassword} = this.userInfo;
             let flag = false;
             if (this.userInfo.agree) {
-                if (userName&&phoneNumber&&phoneCode&&loginPassword&&comfirmPassword) {
-                    if (loginPassword===comfirmPassword) {
+                if (userName&&phoneNumber&&phoneCode&&loginPassword&&confirmPassword) {
+                    if (loginPassword===confirmPassword) {
                         this.codeArray.forEach(code => {
                             if (code === phoneCode) {
-                                this.$store.dispatch('user/saveUserInfo',{userName,phoneNumber,comfirmPassword});
+                                this.$store.dispatch('user/saveUserInfo',{userName,phoneNumber,loginPassword});
                                 flag = true;
                             }
                         });
@@ -120,6 +120,9 @@ export default {
             } else {
                 alert("请阅读并同意注册协议")
             }
+        },
+        verifyUserName() {
+            // this.$store.dispatch('user/verifyUserName',{userName : this.userName,phoneNumber:this.phoneNumber});
         }
         
     },

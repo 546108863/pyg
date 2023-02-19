@@ -6,12 +6,12 @@
             <div class="left">
                 <ul>
                     <li>品优购欢迎您!</li>
-                    <li v-if = "!islogin">
+                    <li v-if = "!userName">
                         <router-link  class="entry" to="/login">请登陆</router-link>
                         <router-link  class="register" to="/register">免费注册</router-link>
                     </li>
                     <li v-else>
-                        <a href="javascript:;" class="entry">{{nickname}}</a>
+                        <a href="javascript:;" class="entry">{{userName}}</a>
                         <button  @click="logout">退出登录</button>
                     </li>
                 </ul>
@@ -39,38 +39,31 @@
     
 </template>
 
-<script scoped>
+<script>
     export default {
         name: "HeaderNav",
         data() {
             return {
-                nickname: ""
+                
             }
         },
         methods: {
             logout() {
-                this.islogin = false;
-                this.nickname = "";
-                this.$router.push("/");
+                this.$store.state.user.token = "";
+                this.$store.state.user.userInfo = {};
+                this.$store.state.user.userList = [];
             },
         },
     computed: {
-        islogin() {
-            if (this.$route.query.userId) {
-                this.nickname = this.$route.query.userId;
-                return true;
-            } else {
-                this.nickname = "";
-                return false;
-            }
-            
+        userName(){
+            return this.$store.state.user.userInfo.userName;
         }
     },
 }
     
 </script>
 
-<style>
+<style scoped>
 
 button {
     border: none;

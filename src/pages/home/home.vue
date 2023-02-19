@@ -17,6 +17,9 @@
       Header,
       Main,
       Bottom
+    },
+    mounted(){
+      this.$store.dispatch('user/getUserInfo');
     }
   }
 </script>

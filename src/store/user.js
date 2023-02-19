@@ -2,17 +2,18 @@ import { v4 as uuidv4 } from "uuid";
 
 const actions = {
 	login({ commit, state }, data) {
-		state.userList.forEach((userInfo) => {
+		state.userList = JSON.parse(localStorage.getItem('userList'))
+		state.userList.forEach((user) => {
 			if (
-				(userInfo.userName === data.userId ||
-					userInfo.phoneNumber === data.userId) &&
-				userInfo.confirmPassword === data.userPassword
+				(user.userInfo.userName === data.userId ||
+					user.userInfo.phoneNumber === data.userId) &&
+				user.userPassword === data.userPassword
 			) {
 				let token = uuidv4();
-				commit(LOGIN, { token, data });
-				return true;
+				user.token = token;
+				commit('LOGIN', { token, data });
 			} else {
-				return false;
+				alert("用户名或密码错误");
 			}
 		});
 	},
@@ -22,6 +23,23 @@ const actions = {
 	saveUserInfo({ commit }, value) {
 		commit("SAVEUSERINFO", value);
 	},
+	verifyUserName(context,value) {
+		let list = JSON.parse(localStorage.getItem("userList"));
+		list.forEach(userInfo=>{
+			if (userInfo.userName === value.userName) {
+				alert( "用户名已存在");
+			} else if(userInfo.phoneNumber === value.phoneNumber) {
+				alert("手机号已存在");
+			}
+		})
+	},
+	getUserInfo({state,commit}) {
+		state.userList.forEach(user=>{
+			if(user.token === state.token) {
+				commit('GETUSERINFO',user.userInfo);
+			}
+		})
+	}
 };
 const mutations = {
 	LOGIN(state, data) {
@@ -47,15 +65,23 @@ const mutations = {
 		state.code = state.codeArray[index];
 	},
 	SAVEUSERINFO(state, value) {
-		state.userList.push(value);
-		localStorage.setItem("userList", JSON.stringify([state.userList]));
+		if(localStorage.getItem("userList")){
+			state.userList = JSON.parse(localStorage.getItem("userList"));
+		}
+		let user = {token:"",userPassword:value.loginPassword,userInfo:{userName : value.userName,phoneNumber : value.phoneNumber}};
+		state.userList.push(user);
+		localStorage.setItem("userList", JSON.stringify(state.userList));
 	},
+	GETUSERINFO(state,data){
+		state.userInfo = data;
+	}
 };
 const state = {
 	token: "",
 	codeArray: [],
 	userList: [],
 	code: "",
+	userInfo:{}
 };
 const getters = {};
 
