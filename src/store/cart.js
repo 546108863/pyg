@@ -28,6 +28,13 @@ const actions = {
                 property.cartIsChecked = isChecked;
         });
         dispatch('changeChecked');
+    },
+    getCartCount({commit}) {
+        if (sessionStorage.getItem('userToken')) {
+            let cartList = JSON.parse(localStorage.getItem('userShopCartListInfo'));
+            let count = cartList.userShopCartList.length;
+            commit('GETCARTCOUNT',count);
+        }
     }
 };
 const mutations = {
@@ -47,12 +54,19 @@ const mutations = {
         info.userShopCartList = state.shopCartInfo.shopCartList;
         localStorage.setItem("userShopCartListInfo", JSON.stringify(info));
     },
-    ALLCHECKED(state,isChecked) {
-        
+    GETCARTCOUNT(state,count){
+        let skuCount = sessionStorage.getItem('cartSkuCount');
+        if (skuCount) {
+            state.shopCartInfo.skuCount =  skuCount;
+        }else {
+            sessionStorage.setItem('cartSkuCount',count);
+            state.shopCartInfo.skuCount =  count;
+        }
     }
 };
 const state = {
     shopCartInfo:{
+        skuCount:0,
         skuName:"",
         shopCartList: []
     }

@@ -11,6 +11,8 @@ const actions = {
 			) {
 				let token = uuidv4();
 				user.token = token;
+				localStorage.setItem('userList', JSON.stringify(state.userList));
+				sessionStorage.setItem('userToken', token);
 				commit('LOGIN', { token, data });
 			} else {
 				alert("用户名或密码错误");
@@ -33,12 +35,16 @@ const actions = {
 			}
 		})
 	},
-	getUserInfo({state,commit}) {
-		state.userList.forEach(user=>{
-			if(user.token === state.token) {
-				commit('GETUSERINFO',user.userInfo);
-			}
-		})
+	getUserInfo({ state, commit }) {
+		if (sessionStorage.getItem("userToken")) {
+			let token = sessionStorage.getItem("userToken");
+			let userList = JSON.parse(localStorage.getItem("userList"));
+			userList.forEach(user => {
+				if (user.token === token) {
+					commit('GETUSERINFO',user.userInfo);
+				}
+			})
+		}
 	}
 };
 const mutations = {

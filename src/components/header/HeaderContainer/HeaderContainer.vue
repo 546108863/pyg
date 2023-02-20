@@ -4,7 +4,7 @@
         <div class= "header-main">
             <!-- 头部左侧logo -->
             <div class="header-logo">
-                <img src="@/assets/images/logo.png" alt="logo">
+                <router-link to="/"><img src="@/assets/images/logo.png" alt="logo"></router-link>
             </div>
             <!-- 头部搜索框 -->
             <div class="header-search">
@@ -24,7 +24,7 @@
                 </div>
             </div>
             <!-- 头部购物车 -->
-            <div class="shopcar">
+            <div class="shopcar" @mouseenter="getCartCount">
                 <div>
                     <ul>
                         <li><img src="@/assets/images/shop.png" alt="购物车"></li>
@@ -32,7 +32,7 @@
                         <li><img src="@/assets/images/next.png" alt=""></li>
                     </ul>
                 </div>
-                <div class="count">8</div>
+                <div class="count">{{count}}</div>
             </div>
         </div>
     </div>
@@ -40,7 +40,37 @@
 
 <script>
 export default {
-    name:"HeaderContainer"
+    name:"HeaderContainer",
+    data() {
+        return {
+            // count:0
+        }
+    },
+    computed: {
+        count() {
+            if (sessionStorage.getItem('userToken')) {
+                return this.$store.state.cart.shopCartInfo.skuCount;
+            }
+            return 0;
+        }
+    },
+    methods: {
+        getCartCount(){
+            // if (sessionStorage.getItem('userToken')) {
+            //     this.$store.dispatch('cart/getCartCount');
+            //     this.count = this.$store.state.shopCartInfo.skuNum;
+            // }
+            this.$store.dispatch('cart/getCartCount');
+        }
+    },
+    mounted() {
+        // if (this.$store.state.shopCartInfo.skuNum) {
+        //     this.count = this.$store.state.shopCartInfo.skuNum;
+        // }else {
+        //     this.count = 0;
+        // }
+        // this.getCartCount();
+    }
 }
 </script>
 

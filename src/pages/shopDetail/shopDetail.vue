@@ -1,135 +1,7 @@
 <template>
   <div>
     <!-- 顶部快捷导航start -->
-    <div class="shortcut">
-      <div class="w">
-        <div class="fl">
-          <ul>
-            <li>品优购欢迎您！</li>
-            <li>
-              <a href="#">请登录</a>
-              <a href="#" class="style-red">免费注册</a>
-            </li>
-          </ul>
-        </div>
-        <div class="fr">
-          <ul>
-            <li><a href="#">我的订单</a></li>
-            <li class="spacer"></li>
-            <li>
-              <a href="#">我的品优购</a>
-              <i class="icomoon"></i>
-            </li>
-            <li class="spacer"></li>
-            <li><a href="#">品优购会员</a></li>
-            <li class="spacer"></li>
-            <li><a href="#">企业采购</a></li>
-            <li class="spacer"></li>
-            <li><a href="#">关注品优购</a> <i class="icomoon"></i></li>
-            <li class="spacer"></li>
-            <li><a href="#">客户服务</a> <i class="icomoon"></i></li>
-            <li class="spacer"></li>
-            <li><a href="#">网站导航</a> <i class="icomoon"></i></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-    <!-- 顶部快捷导航end  -->
-    <!-- header制作 -->
-    <div class="header w">
-      <!-- logo -->
-      <div class="logo">
-        <h1>
-          <a href="index.html" title="品优购">品优购</a>
-        </h1>
-      </div>
-      <!-- search -->
-      <div class="search">
-        <input type="text" class="text" value="请搜索内容..." />
-        <button class="btn">搜索</button>
-      </div>
-      <!-- hotwrods -->
-      <div class="hotwrods">
-        <a href="#" class="style-red">优惠购首发</a>
-        <a href="#">亿元优惠</a>
-        <a href="#">9.9元团购</a>
-        <a href="#">美满99减30</a>
-        <a href="#">办公用品</a>
-        <a href="#">电脑</a>
-        <a href="#">通信</a>
-      </div>
-      <div class="shopcar">
-        <i class="car"> </i>我的购物车 <i class="arrow">  </i>
-        <i class="count">80</i>
-      </div>
-    </div>
-    <!-- header 结束 -->
-    <!-- nav start -->
-    <div class="nav">
-      <div class="w">
-        <div class="dropdown fl">
-          <div class="dt">全部商品分类</div>
-          <div class="dd" style="display: none">
-            <ul>
-              <li class="menu_item"><a href="#">家用电器</a> <i>  </i></li>
-              <li class="menu_item">
-                <a href="list.html">手机</a> 、 <a href="#">数码</a> 、
-                <a href="#">通信</a>
-                <i>  </i>
-              </li>
-              <li class="menu_item"><a href="#">电脑、办公</a> <i>  </i></li>
-              <li class="menu_item">
-                <a href="#">家居、家具、家装、厨具</a> <i>  </i>
-              </li>
-              <li class="menu_item">
-                <a href="#">男装、女装、童装、内衣</a> <i>  </i>
-              </li>
-              <li class="menu_item">
-                <a href="#">个户化妆、清洁用品、宠物</a> <i>  </i>
-              </li>
-              <li class="menu_item">
-                <a href="#">鞋靴、箱包、珠宝、奢侈品</a> <i>  </i>
-              </li>
-              <li class="menu_item">
-                <a href="#">运动户外、钟表</a> <i>  </i>
-              </li>
-              <li class="menu_item">
-                <a href="#">汽车、汽车用品</a> <i>  </i>
-              </li>
-              <li class="menu_item">
-                <a href="#">母婴、玩具乐器</a> <i>  </i>
-              </li>
-              <li class="menu_item">
-                <a href="#">食品、酒类、生鲜、特产</a> <i>  </i>
-              </li>
-              <li class="menu_item"><a href="#">医药保健</a> <i>  </i></li>
-              <li class="menu_item">
-                <a href="#">图书、音像、电子书</a> <i> </i>
-              </li>
-              <li class="menu_item">
-                <a href="#">彩票、旅行、充值、票务</a> <i> </i>
-              </li>
-              <li class="menu_item">
-                <a href="#">理财、众筹、白条、保险</a> <i>  </i>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <!-- 右侧导航 -->
-        <div class="navitems fl">
-          <ul>
-            <li><a href="#">服装城</a></li>
-            <li><a href="#">美妆馆</a></li>
-            <li><a href="#">传智超市</a></li>
-            <li><a href="#">全球购</a></li>
-            <li><a href="#">闪购</a></li>
-            <li><a href="#">团购</a></li>
-            <li><a href="#">拍卖</a></li>
-            <li><a href="#">有趣</a></li>
-          </ul>
-        </div>
-      </div>
-    </div>
+    <Header></Header>
     <!-- nav end -->
 
     <!-- 详情页内容部分	 -->
@@ -340,12 +212,14 @@
 </template>
 
 <script>
+import Header from '@/components/header/header.vue';
 import Bottom from "../../components/bottom.vue";
 import Zoom from "./zoom/zoom.vue";
 
 export default {
   name: "ShopDetail",
   components: {
+    Header,
     Bottom,
     Zoom,
   },
@@ -553,55 +427,6 @@ body {
 .style-red {
   color: #c81623;
 }
-.spacer {
-  width: 1px;
-  height: 12px;
-  background-color: #666;
-  margin: 9px 12px 0;
-}
-/*顶部快捷导航*/
-.shortcut {
-  height: 31px;
-  background-color: #f1f1f1;
-  line-height: 31px;
-}
-.shortcut li {
-  float: left;
-}
-/*header区域*/
-.header {
-  position: relative;
-  height: 105px;
-}
-.logo {
-  position: absolute;
-  top: 25px;
-  left: 0;
-  width: 175px;
-  height: 56px;
-}
-.logo a {
-  display: block;
-  /*overflow: hidden;*/
-  width: 175px;
-  height: 56px;
-  background: url(./images/logo.png) no-repeat;
-  /*text-indent: -999px;*/
-  font-size: 0;
-}
-.search {
-  position: absolute;
-  top: 25px;
-  left: 348px;
-}
-.text {
-  float: left;
-  width: 445px;
-  height: 32px;
-  border: 2px solid #b1191a;
-  padding-left: 10px;
-  color: #ccc;
-}
 .btn {
   float: left;
   width: 82px;
@@ -610,51 +435,6 @@ body {
   border: 0;
   font-size: 16px;
   color: #fff;
-}
-.hotwrods {
-  position: absolute;
-  top: 65px;
-  left: 348px;
-}
-.hotwrods a {
-  margin: 0 10px;
-}
-.shopcar {
-  position: absolute;
-  top: 25px;
-  right: 64px;
-  width: 138px;
-  height: 34px;
-  border: 1px solid #dfdfdf;
-  background-color: #f7f7f7;
-  line-height: 34px;
-  text-align: center;
-}
-.car {
-  font-family: "icomoon";
-  color: #da5555;
-}
-.arrow {
-  font-family: "icomoon";
-  margin-left: 5px;
-}
-.count {
-  position: absolute;
-  top: -5px;
-  /*应该是左侧对齐 文字才能往右走显示*/
-  left: 100px;
-  background-color: #e60012;
-  height: 14px;
-  padding: 0 3px;
-  line-height: 14px;
-  color: #fff;
-  /*border-radius: 左上角 右上角  右下角  左下角;*/
-  border-radius: 7px 7px 7px 0;
-}
-/*nav start*/
-.nav {
-  height: 45px;
-  border-bottom: 2px solid #b1191a;
 }
 .dropdown {
   width: 209px;

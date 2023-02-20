@@ -52,6 +52,9 @@
                 this.$store.state.user.token = "";
                 this.$store.state.user.userInfo = {};
                 this.$store.state.user.userList = [];
+                this.$store.state.cart.shopCartInfo.skuCount = 0;
+                sessionStorage.removeItem(['userToken']);
+                sessionStorage.removeItem('cartSkuCount');
             },
         },
     computed: {
