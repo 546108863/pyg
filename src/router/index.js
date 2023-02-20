@@ -6,7 +6,9 @@ import Cart from '../pages/cart/cart'
 import ShopDetail from '../pages/shopDetail/shopDetail'
 import  CartAccess from '../pages/cartAccess/cartAccess'
 
-export default new VueRouter({
+import store from '@/store'
+
+const router =  new VueRouter({
     routes: [
         {
             path: "",
@@ -35,3 +37,24 @@ export default new VueRouter({
 
     ]
 })
+
+router.beforeEach((to,from,next)=>{
+    let token = sessionStorage.getItem('userToken');
+    if (token) {
+        if (to.path === '/login' || to.path === '/register') {
+            next("/");
+        }else {
+            if (!store.state.user.token) {
+                store.dispatch('user/getUserInfo');
+            }
+            next();
+        }
+    }else {
+        next();
+        if (to.path === '/cart') {
+            next('/login')
+        } 
+    }
+})
+
+export default router;
