@@ -1,28 +1,25 @@
 <template>
-  <div>
+  <div class="Header">
     <!-- 头部导航栏 -->
-    <HeaderNav/>
-    <HeaderContainer/>
+    <HeaderNav />
+    <HeaderContainer />
     <HeaderBottom></HeaderBottom>
   </div>
 </template>
 
 <script>
-import HeaderNav from './HeaderNav/HeaderNav.vue'
-import HeaderContainer from './HeaderContainer/HeaderContainer.vue'
-import HeaderBottom from './HeaderBottom/HeaderBottom.vue'
-
+import HeaderNav from "./HeaderNav/HeaderNav.vue";
+import HeaderContainer from "./HeaderContainer/HeaderContainer.vue";
+import HeaderBottom from "./HeaderBottom/HeaderBottom.vue";
 
 export default {
-    name:'Header',
-    components: {
-        HeaderNav,
-        HeaderContainer,
-        HeaderBottom
-    }
-}
+  name: "Header",
+  components: {
+    HeaderNav,
+    HeaderContainer,
+    HeaderBottom,
+  },
+};
 </script>
 
-<style>
-
-</style>
+<style></style>

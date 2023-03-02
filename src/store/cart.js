@@ -23,10 +23,11 @@ const actions = {
             }
         }
     },
-    allChecked({ dispatch, state },isChecked){
+    allChecked({ dispatch, state, commit },isAllChecked){
         state.shopCartInfo.shopCartList.forEach(property => {
-                property.cartIsChecked = isChecked;
+                property.cartIsChecked = isAllChecked;
         });
+        commit('CHANGEALLCHECKED',isAllChecked)
         dispatch('changeChecked');
     },
     getCartCount({commit}) {
@@ -40,6 +41,7 @@ const actions = {
 const mutations = {
     GETSHOPCARTINFO(state) {
         let info = JSON.parse(localStorage.getItem("userShopCartListInfo"));
+        state.shopCartInfo.isAllChecked = info.isAllChecked;
         state.shopCartInfo.skuName = info.skuName;
         state.shopCartInfo.shopCartList = info.userShopCartList;
     },
@@ -62,13 +64,20 @@ const mutations = {
             sessionStorage.setItem('cartSkuCount',count);
             state.shopCartInfo.skuCount =  count;
         }
+    },
+    CHANGEALLCHECKED(state,isAllChecked) {
+        state.shopCartInfo.isAllChecked = isAllChecked;
+        let info = JSON.parse(localStorage.getItem("userShopCartListInfo"));
+        info.isAllChecked = isAllChecked;
+        localStorage.setItem("userShopCartListInfo", JSON.stringify(info));
     }
 };
 const state = {
     shopCartInfo:{
         skuCount:0,
         skuName:"",
-        shopCartList: []
+        shopCartList: [],
+        isAllChecked:false
     }
 };
 const getters = {};

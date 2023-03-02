@@ -41,8 +41,8 @@
 </template>
 
 <script>
-import Bottom from "@/components/bottom.vue";
-import Header from "@/components/header/header.vue";
+import Bottom from "@/components/Bottom.vue";
+import Header from "@/components/Header/Header.vue";
 
 export default {
   name: "cartAccess",
