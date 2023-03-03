@@ -38,7 +38,7 @@
           type="text"
           autocomplete="off"
           :value="item.skuNum"
-          @change="skuNumChange('changeSkuNum', item, $event, index)"
+          @change="skuNumChange('changeSkuNum', item, $event)"
         />
         <button @click="skuNumChange('addSkuNum', item, $event)">+</button>
       </div>
@@ -65,50 +65,44 @@
 
 <script>
 import { mapState } from 'vuex';
+import debounce from '@/utils/deBounce';
+
 export default {
   name: "CartItem",
   data() {
     return {
-      skuNumChangeFlag: true
     }
   },
   methods: {
+    dis:debounce(function(){this.$store.dispatch("cart/changeSkuNum")},300),
     skuNumChange(type, sku, e, index) {
-      if (this.skuNumChangeFlag) {
-        this.skuNumChangeFlag = false;
-        let num = e.target.value;
-        switch (type) {
-          case "addSkuNum":
-            sku.skuNum++;
-            break;
-
-          case "reduceSkuNum":
-            if (sku.skuNum <= 1) {
-              if (confirm("是否删除该商品")) {
-                this.deleteItem(sku, index);
-              }
-            } else {
-              sku.skuNum--;
+      this.skuNumChangeFlag = false;
+      let num = e.target.value;
+      switch (type) {
+        case "addSkuNum":
+          sku.skuNum++;
+          break;
+        case "reduceSkuNum":
+          if (sku.skuNum <= 1) {
+            if (confirm("是否删除该商品")) {
+              this.deleteItem(sku, index);
             }
-            break;
-
-          case "changeSkuNum":
-            if (!isNaN(num) && num >= 0 && num != "") {
-              e.target.value = parseInt(e.target.value);
-              sku.skuNum = parseInt(num);
-            } else {
-              e.target.value = sku.skuNum;
-            }
-            break;
-          default:
-            break;
-        }
-        this.$store.dispatch("cart/changeSkuNum");
-        setTimeout(() => {
-          this.skuNumChangeFlag = true;
-        }, 300);
+          } else {
+            sku.skuNum--;
+          }
+          break;
+        case "changeSkuNum":
+          if (!isNaN(num) && num >= 0 && num != "") {
+            e.target.value = parseInt(e.target.value);
+            sku.skuNum = parseInt(num);
+          } else {
+            e.target.value = sku.skuNum;
+          }
+          break;
+        default:
+          break;
       }
-
+      this.dis();
     },
     deleteItem(skuInfo, index) {
       this.$store.dispatch("cart/deleteItem", index);
@@ -136,6 +130,8 @@ export default {
     ...mapState('cart',['shopCartInfo'])
   },
   props:['item'],
+  mounted() {
+  },
 };
 </script>
 
